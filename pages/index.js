@@ -8,31 +8,25 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 
 export default function index() {
   const [isLoading, setLoading] = useState(false)
-  const [userLocation, setUserLocation] = useState('')
+  const [userCoords, setUserCoords] = useState(null)
   const [dailyForecast, setDailyForecast] = useState([])
   const [hourlyForecast, setHourlyForecasts] = useState([])
   const [currentForecast, setCurrentForecast] = useState(undefined)
   const [activeDay, setActiveDay] = useState(new Date().getDate())
 
   useEffect(() => {
-    // check if geolocation is supported/enabled on current browser
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        function success(position) {
-          setUserLocation(position)
-        },
-        function error(error_message) {
-          // for when getting location results in an error
-          console.error('An error has occured while retrieving location', error_message)
-        }
-      )
-    } else {
-      console.log('geolocation is not enabled on this browser')
-    }
+    requestLocation()
   }, [])
 
   useEffect(() => {
-    fetch(`${BASE_URL}/onecall?lat=35&lon=139&cnt=20&units=metric&appid=${OPEN_WEATHER_API}`)
+    if (userCoords == null) {
+      requestLocation()
+      return
+    }
+
+    fetch(
+      `${BASE_URL}/onecall?lat=${userCoords.lat}&lon=${userCoords.long}&cnt=20&units=metric&appid=${OPEN_WEATHER_API}`
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
@@ -40,13 +34,28 @@ export default function index() {
         setDailyForecast(result.daily)
         setCurrentForecast(result.current)
         setHourlyForecasts(result.hourly)
-        // setUserLocation(result.city.name)
       })
-  }, [])
+  }, [userCoords?.lat])
+
+  const requestLocation = () => {
+    // check if geolocation is supported/enabled on current browser
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserCoords({ lat: position.coords.latitude, long: position.coords.longitude })
+        },
+        (error_message) => {
+          console.error('An error has occured while retrieving location', error_message)
+        }
+      )
+    } else {
+      console.log('geolocation is not enabled on this browser')
+    }
+  }
 
   return (
     <div>
-      <SearchBar location={userLocation} />
+      <SearchBar location={userCoords} />
       <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
       <DetailedForecast
         currentData={currentForecast}
