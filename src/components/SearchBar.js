@@ -23,7 +23,7 @@ function SearchBar({ location, setLocation }) {
 
   const selectPlace = (place, coord) => {
     setSearchText(place)
-    setLocation(coord)
+    setLocation({ lat: coord.lat, long: coord.lon })
     setSearchList([])
   }
 
@@ -35,7 +35,7 @@ function SearchBar({ location, setLocation }) {
       <input
         className={styles.searchInput}
         type='text'
-        placeholder={location}
+        placeholder='Search'
         onChange={(e) => setSearchText(e.target.value.toLowerCase())}
         value={searchText}
       />
@@ -47,13 +47,7 @@ function SearchBar({ location, setLocation }) {
 
       <section className={styles.searchListContainer}>
         {searchList.map((place) => (
-          <SearchList
-            key={place.id}
-            selectPlace={selectPlace}
-            setLocation={setLocation}
-            data={place}
-            keyword={searchText}
-          />
+          <SearchList key={place.id} selectPlace={selectPlace} data={place} keyword={searchText} />
         ))}
       </section>
     </div>
