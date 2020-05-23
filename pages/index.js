@@ -12,6 +12,7 @@ export default function index() {
   const [dailyForecast, setDailyForecast] = useState([])
   const [hourlyForecast, setHourlyForecasts] = useState([])
   const [currentForecast, setCurrentForecast] = useState(undefined)
+  const [activeDay, setActiveDay] = useState(new Date().getDate())
 
   useEffect(() => {
     // check if geolocation is supported/enabled on current browser
@@ -31,11 +32,11 @@ export default function index() {
   }, [])
 
   useEffect(() => {
-    fetch(`${BASE_URL}/onecall?lat=35&lon=139&cnt=7&units=metric&appid=${OPEN_WEATHER_API}`)
+    fetch(`${BASE_URL}/onecall?lat=35&lon=139&cnt=20&units=metric&appid=${OPEN_WEATHER_API}`)
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
-        console.log(result.hourly)
+        console.log(result.daily)
         setDailyForecast(result.daily)
         setCurrentForecast(result.current)
         setHourlyForecasts(result.hourly)
@@ -46,8 +47,12 @@ export default function index() {
   return (
     <div>
       <SearchBar location={userLocation} />
-      <DailyForecast data={dailyForecast} />
-      <DetailedForecast currentData={currentForecast} hourlyData={hourlyForecast} />
+      <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
+      <DetailedForecast
+        currentData={currentForecast}
+        hourlyData={hourlyForecast}
+        activeDay={activeDay}
+      />
     </div>
   )
 }

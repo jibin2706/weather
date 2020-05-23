@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { XAxis, CartesianGrid, Line, LineChart } from 'recharts'
 import { getWeatherIconPath, getLocaleDate } from '../utils'
 import styles from './DetailedForecast.module.css'
-import {
-  AreaChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Area,
-  ReferenceDot,
-  Line,
-  LineChart,
-} from 'recharts'
 
-function DetailedForecast({ currentData, hourlyData }) {
+function DetailedForecast({ currentData, hourlyData, activeDay }) {
   const [lineChartData, setLineChartData] = useState([])
 
   useEffect(() => {
     // formatting data to fit the chart
     const data = hourlyData.filter((forecast) => {
-      const today = new Date().getDate()
-      if (getLocaleDate(forecast.dt).day === today)
+      if (getLocaleDate(forecast.dt).day == activeDay)
         return {
           dt: forecast.dt,
           name: `${Math.round(forecast.temp)}°`,
@@ -30,7 +19,7 @@ function DetailedForecast({ currentData, hourlyData }) {
     })
 
     setLineChartData(data)
-  }, [hourlyData])
+  }, [hourlyData, activeDay])
 
   const getFormatededHour = (timestamp) => {
     const localTimeString = new Date(timestamp * 1000)
