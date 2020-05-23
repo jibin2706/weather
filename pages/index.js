@@ -10,6 +10,7 @@ export default function index() {
   const [isLoading, setLoading] = useState(false)
   const [userLocation, setUserLocation] = useState('')
   const [dailyForecast, setDailyForecast] = useState([])
+  const [hourlyForecast, setHourlyForecasts] = useState([])
   const [currentForecast, setCurrentForecast] = useState(undefined)
 
   useEffect(() => {
@@ -34,9 +35,10 @@ export default function index() {
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
-        console.log(result.current)
+        console.log(result.hourly)
         setDailyForecast(result.daily)
         setCurrentForecast(result.current)
+        setHourlyForecasts(result.hourly)
         // setUserLocation(result.city.name)
       })
   }, [])
@@ -45,7 +47,7 @@ export default function index() {
     <div>
       <SearchBar location={userLocation} />
       <DailyForecast data={dailyForecast} />
-      <DetailedForecast currentData={currentForecast} />
+      <DetailedForecast currentData={currentForecast} hourlyData={hourlyForecast} />
     </div>
   )
 }

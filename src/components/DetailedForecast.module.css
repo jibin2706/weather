@@ -7,6 +7,7 @@
 .currentTempContainer {
   display: flex;
   align-items: baseline;
+  margin-bottom: 1.5rem;
 }
 
 .currentTemp {
@@ -20,6 +21,11 @@
   margin-left: 1rem;
 }
 
+.graphContainer {
+  overflow: scroll;
+  margin-bottom: 2rem;
+}
+
 .secondaryStatsContainer {
   display: flex;
   margin-bottom: 2rem;
@@ -31,6 +37,9 @@
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
+}
+
+.secondaryStats:first-of-type {
   margin-right: 0.5rem;
 }
 
