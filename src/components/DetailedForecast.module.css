@@ -1,7 +1,7 @@
 .detailedContainer {
   border-radius: 8px;
   box-shadow: var(--shadow1);
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1rem 0;
 }
 
 .currentTempContainer {
@@ -28,7 +28,7 @@
 
 .secondaryStatsContainer {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .secondaryStats {
@@ -51,4 +51,9 @@
 .sunriseStats {
   display: flex;
   flex-direction: column;
+}
+
+.sunriseImage {
+  width: 100%;
+  transform: translateY(-20px);
 }
