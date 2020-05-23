@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { XAxis, CartesianGrid, Line, LineChart } from 'recharts'
+import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts'
 import { getWeatherIconPath, getLocaleDate } from '../utils'
 import styles from './DetailedForecast.module.css'
 
 function DetailedForecast({ currentData, hourlyData, activeDay }) {
   const [lineChartData, setLineChartData] = useState([])
 
+  // formatting data for the chart
   useEffect(() => {
-    // formatting data to fit the chart
-    const data = hourlyData.filter((forecast) => {
-      if (getLocaleDate(forecast.dt).day == activeDay)
-        return {
-          dt: Math.round(forecast.dt),
+    let data = []
+    hourlyData.forEach((forecast) => {
+      const hours = new Date(forecast.dt * 1000).getHours()
+      if (getLocaleDate(forecast.dt).day == activeDay) {
+        data.push({
           name: `${Math.round(forecast.temp)}°`,
           temp: Math.round(forecast.temp),
-        }
+          hour: `${hours >= 12 ? hours - 12 : hours}${hours >= 12 ? 'pm' : 'am'}`,
+        })
+      }
     })
 
     setLineChartData(data)
@@ -45,7 +48,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
       </div>
 
       <div className={styles.graphContainer}>
-        <LineChart
+        <AreaChart
           width={730}
           height={250}
           data={lineChartData}
@@ -53,13 +56,19 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
           <defs>
             <linearGradient id='temp' x1='0' y1='0' x2='0' y2='1'>
               <stop offset='5%' stopColor='#00a6fa' stopOpacity={0.6} />
-              <stop offset='90%' stopColor='#00a6fa' stopOpacity={0} />
+              <stop offset='50%' stopColor='#00a6fa' stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey='temp' />
+          <XAxis
+            dataKey='hour'
+            axisLine={false}
+            tickLine={false}
+            allowDecimals={false}
+            allowDuplicatedCategory={true}
+          />
           <CartesianGrid horizontal={false} strokeWidth={3} strokeOpacity={0.4} />
-
-          <Line
+          <Tooltip />
+          <Area
             type='monotone'
             dataKey='temp'
             stroke='#00a6fa'
@@ -68,7 +77,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
             fillOpacity={1}
             fill='url(#temp)'
           />
-        </LineChart>
+        </AreaChart>
       </div>
 
       <div className={styles.secondaryStatsContainer}>
