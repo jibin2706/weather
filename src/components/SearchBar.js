@@ -4,9 +4,9 @@ import styles from './SearchBar.module.css'
 import cities from '../../public/searchCities.json'
 import SearchList from './SearchList'
 
-function SearchBar({ location, setLocation }) {
-  // TODO: need to use geocoding api to get address for coordinates
-  const [searchText, setSearchText] = useState('Mumbai, Maharashtra')
+function SearchBar({ locationName, setLocation }) {
+  // TODO: need to use geocoding api to get address from coordinates
+  const [searchText, setSearchText] = useState(locationName || 'Mumbai, Maharashtra')
   const [searchList, setSearchList] = useState([])
 
   useEffect(() => {

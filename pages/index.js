@@ -13,6 +13,7 @@ export default function index() {
   const [hourlyForecast, setHourlyForecasts] = useState([])
   const [currentForecast, setCurrentForecast] = useState(undefined)
   const [activeDay, setActiveDay] = useState(new Date().getDate())
+  const [locationName, setLocationName] = useState('')
 
   useEffect(() => {
     requestLocation()
@@ -46,11 +47,26 @@ export default function index() {
         },
         (error_message) => {
           console.error('An error has occured while retrieving location', error_message)
+          getLocationUsingIp()
         }
       )
     } else {
       console.log('geolocation is not enabled on this browser')
+      getLocationUsingIp()
     }
+  }
+
+  const getLocationUsingIp = () => {
+    fetch('http://ip-api.com/json')
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        setLocationName(`${result.city}, ${result.regionName}`)
+        setUserCoords({ lat: result.lat, long: result.lon })
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   return (
@@ -58,7 +74,7 @@ export default function index() {
       <Head>
         <title>Weather App</title>
       </Head>
-      <SearchBar location={userCoords} setLocation={setUserCoords} />
+      <SearchBar setLocation={setUserCoords} locationName={locationName} />
       <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
       <DetailedForecast
         currentData={currentForecast}
