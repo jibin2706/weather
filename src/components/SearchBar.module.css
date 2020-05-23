@@ -14,6 +14,7 @@
   padding: 1.75rem 1.75rem 1.75rem 3rem;
   font-weight: 500;
   text-transform: capitalize;
+  transition: box-shadow 200ms ease;
   width: 100%;
 }
 
