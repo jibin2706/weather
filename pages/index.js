@@ -57,12 +57,12 @@ export default function index() {
   }
 
   const getLocationUsingIp = () => {
-    fetch('http://ip-api.com/json')
+    fetch('https://freegeoip.app/json/')
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
-        setLocationName(`${result.city}, ${result.regionName}`)
-        setUserCoords({ lat: result.lat, long: result.lon })
+        setLocationName(`${result.city}, ${result.region_name}`)
+        setUserCoords({ lat: result.latitude, long: result.longitude })
       })
       .catch((e) => {
         console.log(e)
