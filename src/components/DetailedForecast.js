@@ -1,4 +1,6 @@
 import React from 'react'
+import { getWeatherIconPath } from '../utils'
+import styles from './DetailedForecast.module.css'
 
 function DetailedForecast({ currentData }) {
   const getFormatededHour = (timestamp) => {
@@ -9,7 +11,7 @@ function DetailedForecast({ currentData }) {
       .split(':')
 
     // converting timestring "6:46:25 PM" to "6pm"
-    return `${localTimeString[0]}${localTimeString[localTimeString.length - 1]
+    return `${localTimeString[0]}:${localTimeString[1]}${localTimeString[localTimeString.length - 1]
       .substr(-2)
       .toLowerCase()}`
   }
@@ -17,35 +19,43 @@ function DetailedForecast({ currentData }) {
   if (!currentData) return 'Loading'
 
   return (
-    <section>
+    <section className={styles.detailedContainer}>
+      <div className={styles.currentTempContainer}>
+        <h1 className={styles.currentTemp}>{Math.round(currentData.temp)}°C</h1>
+        <img
+          className={styles.currentTempIcon}
+          src={getWeatherIconPath(currentData.weather[0].main)}
+          alt={currentData.weather[0].main}
+        />
+      </div>
+
       <div>
-        {currentData.temp}
-        {currentData.weather[0].main}
+        <p>Graph Here</p>
+      </div>
 
-        <div>
-          <h1>Graph Here</h1>
+      <div className={styles.secondaryStatsContainer}>
+        <div className={styles.secondaryStats}>
+          <span className='bold'>Pressure</span>
+          <span>{currentData.pressure} hpa</span>
         </div>
 
-        <div>
-          Pressure
-          {currentData.pressure}
-        </div>
-
-        <div>
-          Humidity
-          {currentData.humidity} %
+        <div className={styles.secondaryStats}>
+          <span className='bold'>Humidity</span>
+          <span>{currentData.humidity} %</span>
         </div>
       </div>
 
       <div>
-        <div>
-          Sunrise <br />
-          {getFormatededHour(currentData.sunrise)}
-        </div>
+        <div className={styles.sunriseStatsContainer}>
+          <div className={styles.sunriseStats}>
+            <span className='bold'>Sunrise</span>
+            <span className='text-lighter'>{getFormatededHour(currentData.sunrise)}</span>
+          </div>
 
-        <div>
-          Sunset <br />
-          {getFormatededHour(currentData.sunset)}
+          <div className={styles.sunriseStats}>
+            <span className='bold'>Sunset</span>
+            <span className='text-lighter'>{getFormatededHour(currentData.sunset)}</span>
+          </div>
         </div>
       </div>
     </section>

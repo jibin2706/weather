@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500,700;900&display=swap');
 
 :root {
-  --shadow1: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow1: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0 -10px 15px -3px rgba(0, 0, 0, 0.02), 0 -4px 6px -2px rgba(0, 0, 0, 0.02);
   --primary: #00a6fa;
+  --primary-light: #f3fbff;
+  --grey900: #000101;
+  --grey500: #919393;
 }
 
 * {
@@ -12,4 +15,15 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  color: var(--grey900);
+  padding: 1rem;
+}
+
+/* text utilies */
+.text-lighter {
+  color: var(--grey500);
+}
+
+.bold {
+  font-weight: bold;
 }

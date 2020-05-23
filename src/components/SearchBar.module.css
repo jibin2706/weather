@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  margin: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .searchInput {

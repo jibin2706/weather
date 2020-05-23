@@ -1,0 +1,25 @@
+.forecastsContainer {
+  display: flex;
+  font-size: 0.95rem;
+  overflow-x: scroll;
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+}
+
+.dailyForecast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.dailyForecast p {
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+}
+
+.forecastIcon {
+  margin: 0.5rem;
+  width: 27px;
+}
