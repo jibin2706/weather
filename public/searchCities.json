@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1275339,
+    "name": "Mumbai",
+    "state": "Maharashtra",
+    "coord": { "lon": 72.847939, "lat": 19.01441 }
+  },
+  {
+    "id": 1261481,
+    "name": "Delhi",
+    "state": "New Delhi",
+    "coord": { "lon": 77.23114, "lat": 28.61282 }
+  },
+  {
+    "id": 1273313,
+    "name": "Dehra Dūn",
+    "state": "Uttrakhand",
+    "coord": { "lon": 78.033333, "lat": 30.316669 }
+  }
+]

@@ -11,10 +11,9 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
     const data = hourlyData.filter((forecast) => {
       if (getLocaleDate(forecast.dt).day == activeDay)
         return {
-          dt: forecast.dt,
+          dt: Math.round(forecast.dt),
           name: `${Math.round(forecast.temp)}°`,
-          name: `${Math.round(forecast.temp)}°`,
-          temp: forecast.temp,
+          temp: Math.round(forecast.temp),
         }
     })
 

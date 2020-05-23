@@ -55,7 +55,7 @@ export default function index() {
 
   return (
     <div>
-      <SearchBar location={userCoords} />
+      <SearchBar location={userCoords} setLocation={setUserCoords} />
       <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
       <DetailedForecast
         currentData={currentForecast}

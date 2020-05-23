@@ -1,0 +1,23 @@
+.searchListContainer {
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+}
+
+.searchListContainer:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+
+.searchListContainer:last-of-type {
+  border-radius: 0 0 8px 8px;
+  border-bottom: 0;
+}
+
+.weatherIcon {
+  width: 40px;
+  margin-left: 0.5rem;
+}
