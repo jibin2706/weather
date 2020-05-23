@@ -16,5 +16,23 @@
     "name": "Dehra Dūn",
     "state": "Uttrakhand",
     "coord": { "lon": 78.033333, "lat": 30.316669 }
+  },
+  {
+    "id": 6619347,
+    "name": "Navi Mumbai",
+    "state": "Maharashtra",
+    "coord": { "lon": 73.015823, "lat": 19.03681 }
+  },
+  {
+    "id": 1275004,
+    "name": "Kolkata",
+    "state": "West Bengal",
+    "coord": { "lon": 88.36972, "lat": 22.569719 }
+  },
+  {
+    "id": 1264527,
+    "name": "Chennai",
+    "state": "Tamil Nadu",
+    "coord": { "lon": 80.278473, "lat": 13.08784 }
   }
 ]
