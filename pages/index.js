@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
 import SearchBar from '../src/components/SearchBar'
 import DailyForecast from '../src/components/DailyForecast'
 import DetailedForecast from '../src/components/DetailedForecast'
@@ -54,6 +55,9 @@ export default function index() {
 
   return (
     <div>
+      <Head>
+        <title>Weather App</title>
+      </Head>
       <SearchBar location={userCoords} setLocation={setUserCoords} />
       <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
       <DetailedForecast
