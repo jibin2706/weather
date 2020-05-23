@@ -83,8 +83,8 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
         </div>
       </div>
 
-      <div>
-        <div className={styles.sunriseStatsContainer}>
+      <div className={styles.sunriseStatsContainer}>
+        <div className='d-flex justify-space-between'>
           <div className={styles.sunriseStats}>
             <span className='bold'>Sunrise</span>
             <span className='text-lighter'>{getFormatededHour(currentData.sunrise)}</span>

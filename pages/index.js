@@ -7,7 +7,6 @@ const OPEN_WEATHER_API = '6903c2d823cce812920bda6a20370444'
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 
 export default function index() {
-  const [isLoading, setLoading] = useState(false)
   const [userCoords, setUserCoords] = useState(null)
   const [dailyForecast, setDailyForecast] = useState([])
   const [hourlyForecast, setHourlyForecasts] = useState([])
