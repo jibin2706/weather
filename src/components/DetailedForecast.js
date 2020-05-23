@@ -32,7 +32,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
       .toLowerCase()}`
   }
 
-  if (!currentData) return 'Loading'
+  if (!currentData) return <div className='loader'>Loading...</div>
   return (
     <section className={styles.detailedContainer}>
       <div className={styles.currentTempContainer}>
@@ -95,6 +95,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
             <span className='text-lighter'>{getFormatededHour(currentData.sunset)}</span>
           </div>
         </div>
+        <img className={styles.sunriseImage} src='/sunrise.png' alt='Sunrise Sunset' />
       </div>
     </section>
   )
