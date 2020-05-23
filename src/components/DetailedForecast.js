@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts'
-import { getWeatherIconPath, getLocaleDate } from '../utils'
+import { getWeatherIconPath } from '../utils'
 import styles from './DetailedForecast.module.css'
 
 function DetailedForecast({ currentData, hourlyData, activeDay }) {
@@ -11,11 +11,11 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
     let data = []
     hourlyData.forEach((forecast) => {
       const hours = new Date(forecast.dt * 1000).getHours()
-      if (getLocaleDate(forecast.dt).day == activeDay) {
+      if (new Date(forecast.dt * 1000).getDate() == activeDay) {
         data.push({
           name: `${Math.round(forecast.temp)}°`,
-          temp: Math.round(forecast.temp),
-          hour: `${hours >= 12 ? hours - 12 : hours}${hours >= 12 ? 'pm' : 'am'}`,
+          temp: forecast.temp,
+          hour: `${hours > 12 ? hours - 12 : hours}${hours >= 12 ? 'pm' : 'am'}`,
         })
       }
     })
