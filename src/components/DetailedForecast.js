@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts'
 import SunriseSunsetGraph from './SunriseSunsetGraph'
-import { getWeatherIconPath } from '../utils'
+import { getWeatherIconPath, getFormatededHour } from '../utils'
 import styles from './DetailedForecast.module.css'
 
 function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
@@ -23,18 +23,6 @@ function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
 
     setLineChartData(data)
   }, [hourlyData, activeDay])
-
-  const getFormatededHour = (timestamp) => {
-    const localTimeString = new Date(timestamp * 1000)
-      .toLocaleTimeString('en-US', {
-        timeZone: timezone,
-      })
-      .split(':')
-    // converting timestring "6:46:25 PM" to "6pm"
-    return `${localTimeString[0]}:${localTimeString[1]}${localTimeString[localTimeString.length - 1]
-      .substr(-2)
-      .toLowerCase()}`
-  }
 
   if (!currentData) return <div className='loader'>Loading...</div>
   return (
@@ -97,12 +85,12 @@ function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
         <div className='d-flex justify-space-between'>
           <div className={styles.sunriseStats}>
             <span className='bold'>Sunrise</span>
-            <span className='text-lighter'>{getFormatededHour(currentData.sunrise)}</span>
+            <span className='text-lighter'>{getFormatededHour(currentData.sunrise, timezone)}</span>
           </div>
 
           <div className={styles.sunriseStats}>
             <span className='bold'>Sunset</span>
-            <span className='text-lighter'>{getFormatededHour(currentData.sunset)}</span>
+            <span className='text-lighter'>{getFormatededHour(currentData.sunset, timezone)}</span>
           </div>
         </div>
         <div style={{ height: '200px' }}>

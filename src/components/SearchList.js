@@ -28,7 +28,7 @@ function SearchList({ data, keyword, selectPlace }) {
       onClick={() => selectPlace(`${data.name}, ${data.state}`, { lat: data.lat, lon: data.lon })}>
       <span>
         <span
-          class='text-capitalize'
+          className='text-capitalize'
           dangerouslySetInnerHTML={{ __html: highlightKeyword(data.name, keyword) }}
         />
         ,<span className='text-lighter'> {data.state}</span>

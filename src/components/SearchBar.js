@@ -47,7 +47,12 @@ function SearchBar({ locationName, setLocation }) {
 
       <section className={styles.searchListContainer}>
         {searchList.map((place) => (
-          <SearchList key={place.id} selectPlace={selectPlace} data={place} keyword={searchText} />
+          <SearchList
+            key={place.name}
+            selectPlace={selectPlace}
+            data={place}
+            keyword={searchText}
+          />
         ))}
       </section>
     </div>
