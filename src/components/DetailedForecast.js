@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts'
+import SunriseSunsetGraph from './SunriseSunsetGraph'
 import { getWeatherIconPath } from '../utils'
 import styles from './DetailedForecast.module.css'
 
@@ -104,7 +105,13 @@ function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
             <span className='text-lighter'>{getFormatededHour(currentData.sunset)}</span>
           </div>
         </div>
-        <img className={styles.sunriseImage} src='/sunrise.png' alt='Sunrise Sunset' />
+        <div style={{ height: '200px' }}>
+          <SunriseSunsetGraph
+            start={currentData.sunrise}
+            end={currentData.sunset}
+            timezone={timezone}
+          />
+        </div>
       </div>
     </section>
   )

@@ -21,6 +21,10 @@ body {
   margin: auto;
 }
 
+.recharts-area-dot {
+  animation: fade 200ms;
+}
+
 /* text utilies */
 .text-capitalize {
   text-transform: capitalize;
@@ -92,5 +96,15 @@ body {
   40% {
     box-shadow: 0 -2em;
     height: 5em;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
