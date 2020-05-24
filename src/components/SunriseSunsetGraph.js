@@ -15,7 +15,7 @@ function SunriseSunsetGraph({ start, end, timezone }) {
       { name: '', value: 0 },
       { name: midTime > 12 ? 12 - midTime + 'pm' : midTime + 'am', value: 1 },
       { name: '', value: 0 },
-      { name: b.hour + b.format, value: 0 },
+      { name: b.hour + 1 + b.format, value: 0 },
     ]
     setData(data)
   }, [start, end, timezone])
