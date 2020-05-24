@@ -9,7 +9,7 @@ function SearchList({ data, keyword, selectPlace }) {
   const [weather, setWeather] = useState(null)
   useEffect(() => {
     fetch(
-      `${BASE_URL}/weather?lat=${data.coord.lat}&lon=${data.coord.lon}&units=metric&appid=${OPEN_WEATHER_API}`
+      `${BASE_URL}/weather?lat=${data.lat}&lon=${data.lon}&units=metric&appid=${OPEN_WEATHER_API}`
     )
       .then((response) => response.json())
       .then((result) => {
@@ -18,7 +18,7 @@ function SearchList({ data, keyword, selectPlace }) {
   }, [])
 
   const highlightKeyword = (string, keyword) => {
-    return string.toLowerCase().replace(keyword, `<b>${keyword}</b>`)
+    return string.toLowerCase().replace(keyword, `<b class="text-capitalize">${keyword}</b>`)
   }
 
   if (!weather) return null
@@ -28,7 +28,7 @@ function SearchList({ data, keyword, selectPlace }) {
       onClick={() => selectPlace(`${data.name}, ${data.state}`, data.coord)}>
       <span>
         <span
-          className='text-capitalize'
+          class='text-capitalize'
           dangerouslySetInnerHTML={{ __html: highlightKeyword(data.name, keyword) }}
         />
         ,<span className='text-lighter'> {data.state}</span>
