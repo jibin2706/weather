@@ -22,6 +22,10 @@ body {
 }
 
 /* text utilies */
+.text-capitalize {
+  text-transform: capitalize;
+}
+
 .text-lighter {
   color: var(--grey500);
 }

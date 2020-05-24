@@ -17,9 +17,8 @@ function SearchList({ data, keyword, selectPlace }) {
       })
   }, [])
 
-  // TODO: Highlight keyword
   const highlightKeyword = (string, keyword) => {
-    return string
+    return string.toLowerCase().replace(keyword, `<b>${keyword}</b>`)
   }
 
   if (!weather) return null
@@ -28,8 +27,11 @@ function SearchList({ data, keyword, selectPlace }) {
       className={styles.searchListContainer}
       onClick={() => selectPlace(`${data.name}, ${data.state}`, data.coord)}>
       <span>
-        <span>{highlightKeyword(data.name, keyword)}</span>,
-        <span className='text-lighter'> {data.state}</span>
+        <span
+          className='text-capitalize'
+          dangerouslySetInnerHTML={{ __html: highlightKeyword(data.name, keyword) }}
+        />
+        ,<span className='text-lighter'> {data.state}</span>
       </span>
 
       <div className='d-flex justify-space-between'>
