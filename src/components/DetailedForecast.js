@@ -38,7 +38,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
 
       <div className={styles.graphContainer}>
         <AreaChart
-          width={730}
+          width={1400}
           height={250}
           data={lineChartData}
           margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
