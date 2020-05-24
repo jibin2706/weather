@@ -25,7 +25,7 @@ function SearchList({ data, keyword, selectPlace }) {
   return (
     <div
       className={styles.searchListContainer}
-      onClick={() => selectPlace(`${data.name}, ${data.state}`, data.coord)}>
+      onClick={() => selectPlace(`${data.name}, ${data.state}`, { lat: data.lat, lon: data.lon })}>
       <span>
         <span
           class='text-capitalize'

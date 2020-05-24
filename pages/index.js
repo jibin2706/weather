@@ -33,11 +33,20 @@ export default function index() {
       .then((result) => {
         console.log(result)
         setDailyForecast(result.daily)
-        setCurrentForecast(result.current)
         setHourlyForecasts(result.hourly)
         setTimezone(result.timezone)
       })
   }, [userCoords?.lat])
+
+  useEffect(() => {
+    if (dailyForecast === []) return
+
+    dailyForecast.forEach((forecast) => {
+      if (new Date(forecast.dt * 1000).getDate() == activeDay) {
+        setCurrentForecast(forecast)
+      }
+    })
+  }, [dailyForecast, activeDay])
 
   const requestLocation = () => {
     // check if geolocation is supported/enabled on current browser
@@ -78,6 +87,7 @@ export default function index() {
       <DailyForecast data={dailyForecast} activeDay={activeDay} setActiveDay={setActiveDay} />
       <DetailedForecast
         currentData={currentForecast}
+        dailyForecast={dailyForecast}
         hourlyData={hourlyForecast}
         activeDay={activeDay}
         timezone={timezone}

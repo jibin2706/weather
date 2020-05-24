@@ -39,7 +39,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
   return (
     <section className={styles.detailedContainer}>
       <div className={styles.currentTempContainer}>
-        <h1 className={styles.currentTemp}>{Math.round(currentData.temp)}°C</h1>
+        <h1 className={styles.currentTemp}>{Math.round(currentData.temp.max)}°C</h1>
         <img
           className={styles.currentTempIcon}
           src={getWeatherIconPath(currentData.weather[0].main)}
