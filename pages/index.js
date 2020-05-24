@@ -13,6 +13,7 @@ export default function index() {
   const [hourlyForecast, setHourlyForecasts] = useState([])
   const [currentForecast, setCurrentForecast] = useState(undefined)
   const [activeDay, setActiveDay] = useState(new Date().getDate())
+  const [timezone, setTimezone] = useState('UTC')
   const [locationName, setLocationName] = useState('')
 
   useEffect(() => {
@@ -31,10 +32,10 @@ export default function index() {
       .then((response) => response.json())
       .then((result) => {
         console.log(result)
-        console.log(result.daily)
         setDailyForecast(result.daily)
         setCurrentForecast(result.current)
         setHourlyForecasts(result.hourly)
+        setTimezone(result.timezone)
       })
   }, [userCoords?.lat])
 
@@ -60,7 +61,6 @@ export default function index() {
     fetch('https://freegeoip.app/json/')
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
         setLocationName(`${result.city}, ${result.region_name}`)
         setUserCoords({ lat: result.latitude, long: result.longitude })
       })
@@ -80,6 +80,7 @@ export default function index() {
         currentData={currentForecast}
         hourlyData={hourlyForecast}
         activeDay={activeDay}
+        timezone={timezone}
       />
     </div>
   )

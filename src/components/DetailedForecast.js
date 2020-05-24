@@ -3,7 +3,7 @@ import { XAxis, CartesianGrid, Tooltip, AreaChart, Area } from 'recharts'
 import { getWeatherIconPath } from '../utils'
 import styles from './DetailedForecast.module.css'
 
-function DetailedForecast({ currentData, hourlyData, activeDay }) {
+function DetailedForecast({ currentData, hourlyData, activeDay, timezone }) {
   const [lineChartData, setLineChartData] = useState([])
 
   // formatting data for the chart
@@ -26,7 +26,7 @@ function DetailedForecast({ currentData, hourlyData, activeDay }) {
   const getFormatededHour = (timestamp) => {
     const localTimeString = new Date(timestamp * 1000)
       .toLocaleTimeString('en-US', {
-        timeZone: 'Asia/Tokyo',
+        timeZone: timezone,
       })
       .split(':')
     // converting timestring "6:46:25 PM" to "6pm"
